@@ -14,7 +14,7 @@ terraform {
 }
 
 provider "aws" {
-  region = "us-east-1"
+  region = "us-east-2"
 }
 
 # VPC
@@ -31,7 +31,7 @@ resource "aws_vpc" "my_vpc" {
 resource "aws_subnet" "public_subnet" {
   vpc_id                  = aws_vpc.my_vpc.id
   cidr_block              = "10.0.1.0/24"
-  availability_zone       = "us-east-1a" # Zona de disponibilidade específica
+  availability_zone       = "us-east-2a" # Zona de disponibilidade específica
   map_public_ip_on_launch = true
   tags = {
     Name = "public-subnet"
@@ -42,7 +42,7 @@ resource "aws_subnet" "public_subnet" {
 resource "aws_subnet" "public_subnet2" {
   vpc_id                  = aws_vpc.my_vpc.id
   cidr_block              = "10.0.2.0/24"
-  availability_zone       = "us-east-1a" # Ajuste conforme a zona de disponibilidade desejada
+  availability_zone       = "us-east-2a" # Ajuste conforme a zona de disponibilidade desejada
   map_public_ip_on_launch = true
   tags = {
     Name = "public_subnet2"
@@ -53,7 +53,7 @@ resource "aws_subnet" "public_subnet2" {
 resource "aws_subnet" "private_subnet" {
   vpc_id                  = aws_vpc.my_vpc.id
   cidr_block              = "10.0.3.0/24"
-  availability_zone       = "us-east-1b" # Zona de disponibilidade específica
+  availability_zone       = "us-east-2b" # Zona de disponibilidade específica
   map_public_ip_on_launch = true
   tags = {
     Name = "private-subnet"
@@ -64,7 +64,7 @@ resource "aws_subnet" "private_subnet" {
 resource "aws_subnet" "private_subnet2" {
   vpc_id            = aws_vpc.my_vpc.id
   cidr_block        = "10.0.4.0/24"
-  availability_zone = "us-east-1b" # Ajuste conforme a zona de disponibilidade desejada
+  availability_zone = "us-east-2b" # Ajuste conforme a zona de disponibilidade desejada
   tags = {
     Name = "private_subnet2"
   }
@@ -109,4 +109,3 @@ resource "aws_route_table_association" "private_association" {
   subnet_id      = aws_subnet.private_subnet.id
   route_table_id = aws_route_table.private_route_table.id
 }
-
