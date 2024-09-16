@@ -9,7 +9,7 @@ terraform {
   backend "s3" {
     bucket = "statebackendbr20241990uasdi"
     key    = "PROD/terraform.tfstate" # Ajuste para um caminho mais específico
-    region = "us-east-1"
+    region = "us-east-2"
   }
 }
 

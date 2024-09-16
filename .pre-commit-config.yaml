@@ -4,6 +4,4 @@ repos:
     hooks:
       - id: terraform_fmt
         args:
-          - --args=-recursive
-          - --args=-check
-          
+          - --args=-recursive                   
