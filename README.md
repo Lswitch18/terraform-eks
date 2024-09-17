@@ -1,4 +1,6 @@
-Este é um projeto pessoal de Criação de uma infraestrutura de TI completa na AWS que ira rodar serviços conteinerizados e orquestrados pelo Kubernetes.
+Em desenvolvimento
+
+Este é um projeto de terraform de Criação de uma infraestrutura de TI completa na AWS que ira rodar serviços conteinerizados e orquestrados pelo Kubernetes.
 basicamnete no código consta a utilização dos AWS web services abaixo.
 
 Network configs on aws
