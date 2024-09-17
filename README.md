@@ -89,5 +89,5 @@ O projeto utiliza os seguintes recursos e serviços da AWS:
 
 ## Contato
 
-Para dúvidas ou contribuições, entre em contato com [Seu Nome] em [wellyntonjeronimo@outlook.com].
+Para dúvidas ou contribuições, entre em contato com Wellynton em [wellyntonjeronimo@outlook.com].
 
