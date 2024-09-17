@@ -13,6 +13,12 @@ internets gateway
 2 nat gateways
 2 elastic ip
 
+Esse projeto usa a ferramenta pre-commit com hooks de terraform fmt e terraform validate
+
+consta com criação de modulo network
+
+
+
 
 
 
