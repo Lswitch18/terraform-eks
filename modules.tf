@@ -9,3 +9,7 @@ module "eks_network" {
   cidr_block_vpc = var.cidr_block_vpc
 }
 
+module "eks_cluster" {
+  source         = "./modules/cluster"
+  }
+

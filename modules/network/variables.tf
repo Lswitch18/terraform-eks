@@ -5,8 +5,8 @@ variable "cidr_block_vpc" {
 
 }
 
-variable "us-east-2a" {
+variable "us-east-1a" {
   type        = string
-  default     = "us-east-2"
+  default     = "us-east-1"
   description = "Region"
 }
