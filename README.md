@@ -1,93 +1,82 @@
+# 🏗️ Terraform: AWS Infrastructure for EKS (Kubernetes)
 
-# Projeto Terraform: Infraestrutura AWS para Kubernetes
+Este projeto utiliza **Terraform** para automatizar o provisionamento de uma infraestrutura robusta e escalável na AWS, desenhada especificamente para suportar clusters **Amazon EKS (Elastic Kubernetes Service)**.
 
-## Descrição
+---
 
-Este projeto Terraform automatiza a criação de uma infraestrutura completa na AWS, destinada a executar serviços conteinerizados orquestrados pelo Kubernetes. A infraestrutura inclui configuração de rede, sub-redes, e roteamento, utilizando diversos serviços da AWS.
+## 🛠️ Stack Tecnológica
+- **IaC:** Terraform
+- **Cloud Provider:** AWS
+- **Orquestração:** Kubernetes (EKS)
+- **CI/CD Quality:** Pre-commit hooks (fmt, validate)
 
-## Componentes da Infraestrutura
+---
 
-O projeto utiliza os seguintes recursos e serviços da AWS:
+## 🌐 Arquitetura de Rede
 
-### Configurações de Rede
+A infraestrutura segue as melhores práticas de segregação de rede:
 
-- **VPC (Virtual Private Cloud):**
-  - **CIDR Block:** `10.0.0.0/16`
+- **VPC Customizada:** CIDR `10.0.0.0/16`
+- **Subnets Públicas:** Camada de borda para Internet Gateway e NAT Gateways.
+- **Subnets Privadas:** Camada isolada para os nodes do Kubernetes, garantindo que as cargas de trabalho não fiquem expostas diretamente à internet.
+- **Conectividade:** 
+  - **Internet Gateway** para saída/entrada pública.
+  - **NAT Gateways** com Elastic IPs para permitir que nodes privados baixem atualizações com segurança.
 
-- **Sub-redes:**
-  - **Públicas:**
-    - `10.0.1.0/24`
-    - `10.0.2.0/24`
-  - **Privadas:**
-    - `10.0.3.0/24`
-    - `10.0.4.0/24`
+---
 
-- **Tabelas de Roteamento:**
-  - Tabela de Roteamento Pública
-  - Tabela de Roteamento Privada
+## 📂 Estrutura do Código
 
-- **Internet Gateway:**
-  - Para permitir o tráfego de entrada e saída para a VPC.
+```bash
+.
+├── main.tf            # Ponto de entrada (chamada de módulos)
+├── variables.tf       # Definição de variáveis globais
+├── outputs.tf         # Exportação de atributos (VPC IDs, Subnet IDs)
+└── modules/
+    └── network/       # Módulo encapsulado de rede (VPC, IGW, NAT, Routes)
+```
 
-- **NAT Gateways:**
-  - Dois NAT Gateways para fornecer acesso à internet para as instâncias em sub-redes privadas.
+---
 
-- **Elastic IPs:**
-  - Dois Elastic IPs associados aos NAT Gateways para garantir a persistência do endereço IP externo.
+## 🚀 Como Utilizar
 
-## Estrutura do Projeto
+### 1. Pré-requisitos
+- Terraform instalado (v1.0+)
+- AWS CLI configurado com permissões de Administrador
+- [pre-commit](https://pre-commit.com/) instalado para validação de código
 
-1. **Módulo de Rede (`modules/network`):**
-   - Criação e configuração da VPC.
-   - Criação de sub-redes públicas e privadas.
-   - Configuração de tabelas de roteamento e associações.
-   - Configuração de Internet Gateway e NAT Gateways.
+### 2. Inicialização
+```bash
+terraform init
+```
 
-2. **Configuração Principal (`main.tf`):**
-   - Chamada ao módulo de rede.
-   - Definição de outputs para IDs das sub-redes.
+### 3. Validação e Formatação
+```bash
+# Executa os hooks de validação em todos os arquivos
+pre-commit run --all-files
+```
 
-## Ferramentas e Requisitos
+### 4. Deploy
+```bash
+# Verifique o plano de execução
+terraform plan
 
-- **Terraform:** A infraestrutura é gerida utilizando a ferramenta Terraform.
-- **Pre-commit:** Utiliza hooks para garantir a formatação e validação do código Terraform.
-  - **Hooks incluídos:**
-    - `terraform fmt` - Formatação do código.
-    - `terraform validate` - Validação do código.
+# Aplique as mudanças
+terraform apply
+```
 
-## Como Utilizar
+---
 
-1. **Pré-requisitos:**
-   - Certifique-se de ter o Terraform e o `pre-commit` instalados.
+## 📈 Status do Projeto
+- [x] Módulo de Rede (VPC, Subnets, Routing)
+- [ ] Configuração do Cluster EKS (Control Plane)
+- [ ] Configuração de Managed Node Groups
+- [ ] Add-ons (CoreDNS, kube-proxy, aws-node)
 
-2. **Inicializar o Terraform:**
-   ```bash
-   terraform init
-   ```
+---
 
-3. **Verificar a Formatação e Validação do Código:**
-   ```bash
-   pre-commit run --all-files
-   ```
+## 🤝 Contribuições
+Sinta-se à vontade para abrir **Issues** ou enviar **Pull Requests** para melhorias na infraestrutura.
 
-4. **Planejar a Aplicação:**
-   ```bash
-   terraform plan
-   ```
-
-5. **Aplicar as Configurações:**
-   ```bash
-   terraform apply
-   ```
-
-6. **Visualizar Outputs:**
-   Após a aplicação, os IDs das sub-redes podem ser visualizados nos outputs definidos.
-
-## Status do Projeto
-
-- **Em Desenvolvimento:** A configuração de rede foi finalizada. O projeto está atualmente em fase de desenvolvimento para a integração com outros componentes e serviços.
-
-## Contato
-
-Para dúvidas ou contribuições, entre em contato com Wellynton em [wellyntonjeronimo@outlook.com].
-
+---
+**Status:** 🚧 Em Desenvolvimento Ativo
